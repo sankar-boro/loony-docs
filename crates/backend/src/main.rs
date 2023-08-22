@@ -2,8 +2,10 @@ pub mod model;
 pub mod post;
 pub mod route;
 pub mod user;
+pub mod error;
 
 use actix_web::{web, App, HttpServer};
+use actix_cors::Cors;
 use mongodb::Client;
 
 #[actix_web::main]
@@ -14,6 +16,7 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(move || {
         App::new()
+            .wrap(Cors::permissive())
             .app_data(web::Data::new(client.clone()))
             .configure(route::routes)
     })

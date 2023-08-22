@@ -1,7 +1,8 @@
-use crate::model::Post;
+use crate::{model::Post, error::HttpErrorResponse};
 
 use actix_web::{web, HttpResponse};
 use bson::oid::ObjectId;
+use futures::TryStreamExt;
 use mongodb::{bson::doc, Client, Collection};
 
 const DB_NAME: &str = "sankar";
@@ -27,5 +28,19 @@ pub async fn get_post(client: web::Data<Client>, post_id: web::Path<String>) -> 
         Ok(Some(post)) => HttpResponse::Ok().json(post),
         Ok(None) => HttpResponse::NotFound().body(format!("No post found with postname {post_id}")),
         Err(err) => HttpResponse::InternalServerError().body(err.to_string()),
+    }
+}
+
+pub async fn get_posts(client: web::Data<Client>) -> Result<HttpResponse, HttpErrorResponse> {
+    let collection: Collection<Post> = client.database(DB_NAME).collection(COLL_NAME);
+    match collection.find(None, None).await {
+        Ok(mut post) => {
+            let mut x = Vec::new();
+            while let Some(book) = post.try_next().await? {
+                x.push(book);
+            }
+            return Ok(HttpResponse::Ok().json(x));
+        }
+        Err(err) => Err(HttpErrorResponse::from(err.to_string())),
     }
 }

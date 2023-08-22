@@ -10,6 +10,7 @@ pub struct User {
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
 pub struct Post {
+    pub _id: ObjectId,
     pub title: String,
     pub body: String,
     pub user_id: ObjectId,
