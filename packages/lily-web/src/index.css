@@ -1,0 +1,171 @@
+:root {
+  --border-color: rgb(229, 234, 242);
+  --box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.1);
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+#root {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.con-75 {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+nav {
+  border-style: solid;
+  border-color: var(--border-color);
+  border-width: 0px 0px thin;
+  padding: 16px 16px;
+}
+.nav-sections {
+  display: flex;
+  flex-direction: row;
+}
+.nav-left {
+  width: 12%;
+}
+.nav-right {
+  width: 88%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.card {
+  border-style: solid;
+  border-color: var(--border-color);
+  border-width: thin;
+  border-radius: 5px;
+  margin-bottom: 12px;
+  width: 360px;
+}
+.card-header {
+  height: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0px 5px 0px 10px;
+}
+.card-title {
+  font-weight: bold;
+}
+.card-settings {
+  width: 24px;
+  height: 24px;
+}
+.card-settings:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+.card-settings > svg:hover {
+  background-color: #ccc;
+}
+.card-body {
+  padding: 10px;
+}
+.card-menu {
+  display: inline-grid;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+  padding: 10px 0px;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+}
+.card-menu > .li-item {
+  width: 180px;
+  padding: 8px 10px;
+}
+.card-menu > .li-item:hover {
+  background-color: rgb(243, 243, 243);
+}
+.iconSvg {
+  width: 18px;
+  height: 18px;
+}
