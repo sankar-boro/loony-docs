@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { useGetAllPosts } from './api'
 import { Post } from './types'
 import { Menu } from './icons'
+import { useNavigate } from 'react-router-dom'
 
 const Card = ({ post }: { post: Post }) => {
+  const navigate = useNavigate()
+
   const deletePost = () => {
     fetch(`http://localhost:8080/delete_post/${post._id.$oid}`, {
       method: 'POST',
@@ -12,6 +15,10 @@ const Card = ({ post }: { post: Post }) => {
       .then((res) => {
         console.log(res)
       })
+  }
+
+  const editPost = () => {
+    navigate('/edit', { state: post })
   }
 
   const [view, setView] = useState(false)
@@ -31,7 +38,9 @@ const Card = ({ post }: { post: Post }) => {
           </div>
           {view ? (
             <div className="card-menu">
-              <div className="li-item">Edit</div>
+              <div className="li-item" onClick={editPost}>
+                Edit
+              </div>
               <div className="li-item" onClick={deletePost}>
                 Delete
               </div>
@@ -46,8 +55,8 @@ const Card = ({ post }: { post: Post }) => {
   )
 }
 
-const PostComponent = () => {
-  const allPosts = useGetAllPosts()
+const PostComponent = ({ activeView }: any) => {
+  const allPosts = useGetAllPosts(activeView)
   return (
     <div>
       {allPosts.map((post: Post) => {

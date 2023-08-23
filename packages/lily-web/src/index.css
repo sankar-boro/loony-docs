@@ -169,3 +169,14 @@ nav {
   width: 18px;
   height: 18px;
 }
+
+input {
+  padding: 10px;
+  border-radius: 3px;
+  background-color: white;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+input:focus {
+  outline: none;
+}

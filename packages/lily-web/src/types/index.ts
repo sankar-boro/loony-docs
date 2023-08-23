@@ -7,3 +7,8 @@ export type Post = {
   _id: ObjectId
   body: string
 }
+
+export type Group = {
+  _id: ObjectId
+  name: string
+}

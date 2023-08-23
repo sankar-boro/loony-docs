@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavbarComponent from './navbar'
 import PostComponent from './post'
+import GroupComponent from './group'
 
 const HomeComponent = () => {
+  const [activeView, setActiveView] = useState('')
   return (
     <div className="con-100">
       <NavbarComponent />
       <div className="con-75">
-        <PostComponent />
+        <GroupComponent setActiveView={setActiveView} />
+        <PostComponent activeView={activeView} />
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ pub mod post;
 pub mod route;
 pub mod user;
 pub mod error;
+pub mod group;
 
 use actix_web::{web, App, HttpServer};
 use actix_cors::Cors;

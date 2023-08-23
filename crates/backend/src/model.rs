@@ -18,9 +18,21 @@ pub struct Post {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+pub struct UpdatePost {
+    pub _id: String,
+    pub title: String,
+    pub body: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
 pub struct NewCollection {
     pub name: String,
     pub dbname: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+pub struct NewGroup {
+    pub name: String,
 }
 
 /// Adds a new user to the "users" collection in the database.
