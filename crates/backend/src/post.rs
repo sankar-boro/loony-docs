@@ -1,4 +1,4 @@
-use crate::{model::{Post, UpdatePost}, error::HttpErrorResponse};
+use crate::{model::{Post, AddPost, UpdatePost}, error::HttpErrorResponse};
 
 use actix_web::{web, HttpResponse};
 use bson::oid::ObjectId;
@@ -9,9 +9,19 @@ const DB_NAME: &str = "sankar";
 const COLL_NAME: &str = "posts";
 
 /// Adds a new post to the "posts" collection in the database.
-pub async fn add_post(client: web::Data<Client>, form: web::Form<Post>) -> HttpResponse {
+pub async fn add_post(client: web::Data<Client>, form: web::Json<AddPost>) -> HttpResponse {
     let collection = client.database(DB_NAME).collection(COLL_NAME);
-    let result = collection.insert_one(form.into_inner(), None).await;
+    let user_id = match ObjectId::parse_str(&form.user_id.to_string()) {
+        Ok(d) => d,
+        Err(e) => return HttpResponse::InternalServerError().body(e.to_string()),
+    };
+    let new_post = doc! { 
+        "title": &form.title, 
+        "body": &form.body, 
+        "user_id": &user_id,
+        "group": &form.group
+    };
+    let result = collection.insert_one(new_post, None).await;
     match result {
         Ok(_) => HttpResponse::Ok().body("post added"),
         Err(err) => HttpResponse::InternalServerError().body(err.to_string()),

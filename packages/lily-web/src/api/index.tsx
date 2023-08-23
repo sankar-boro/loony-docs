@@ -4,6 +4,8 @@ export const useGetAllPosts = (activeView: string) => {
   const [data, setData] = useState([])
   useEffect(() => {
     if (activeView) {
+      console.log(activeView)
+      setData([])
       fetch(`http://localhost:8080/get_posts/withGroupName/${activeView}`)
         .then((res) => res.json())
         .then((res) => {

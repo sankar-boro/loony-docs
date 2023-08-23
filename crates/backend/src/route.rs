@@ -13,7 +13,7 @@ pub fn routes(config: &mut web::ServiceConfig) {
     config.route("/add_post", web::post().to(post::add_post));
     config.route("/get_post/{post_id}", web::get().to(post::get_post));
     config.route("/get_posts", web::get().to(post::get_posts));
-    config.route("/get_posts/withGroupName/{name}", web::get().to(post::get_posts));
+    config.route("/get_posts/withGroupName/{name}", web::get().to(post::get_posts_where));
     config.route("/delete_post/{post_id}", web::post().to(post::delete_post));
     config.route("/update_post", web::post().to(post::update_post));
 

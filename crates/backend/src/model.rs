@@ -18,6 +18,14 @@ pub struct Post {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
+pub struct AddPost {
+    pub title: String,
+    pub body: String,
+    pub user_id: ObjectId,
+    pub group: Option<String>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize, Serialize)]
 pub struct UpdatePost {
     pub _id: String,
     pub title: String,
