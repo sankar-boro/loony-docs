@@ -44,3 +44,15 @@ pub async fn get_posts(client: web::Data<Client>) -> Result<HttpResponse, HttpEr
         Err(err) => Err(HttpErrorResponse::from(err.to_string())),
     }
 }
+
+pub async fn delete_post(client: web::Data<Client>, post_id: web::Path<String>) -> Result<HttpResponse, HttpErrorResponse> {
+    let post_id = match ObjectId::parse_str(post_id.as_str()) {
+        Ok(d) => d,
+        Err(e) => return Err(HttpErrorResponse::from(e.to_string())),
+    };
+    let collection: Collection<Post> = client.database(DB_NAME).collection(COLL_NAME);
+    match collection.delete_one(doc! { "_id": &post_id }, None).await {
+        Ok(post) => Ok(HttpResponse::Ok().json(post)),
+        Err(err) => Err(HttpErrorResponse::from(err.to_string())),
+    }
+}

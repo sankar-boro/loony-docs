@@ -4,6 +4,16 @@ import { Post } from './types'
 import { Menu } from './icons'
 
 const Card = ({ post }: { post: Post }) => {
+  const deletePost = () => {
+    fetch(`http://localhost:8080/delete_post/${post._id.$oid}`, {
+      method: 'POST',
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+      })
+  }
+
   const [view, setView] = useState(false)
   return (
     <div className="card">
@@ -22,7 +32,9 @@ const Card = ({ post }: { post: Post }) => {
           {view ? (
             <div className="card-menu">
               <div className="li-item">Edit</div>
-              <div className="li-item">Delete</div>
+              <div className="li-item" onClick={deletePost}>
+                Delete
+              </div>
             </div>
           ) : null}
         </div>
